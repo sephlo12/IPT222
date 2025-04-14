@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to bottom, #f3ffe3, #a4d38b, #5cbd73, #00807d, #025661);
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes bounceEffect {
+            0%, 100% {
+                transform: translateY(-50%);
+            }
+            50% {
+                transform: translateY(-60%);
+            }
+        }
+
+        .fade-in {
+            animation: fadeIn 2s ease-in;
+        }
+
+        #particles-js {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 0;
+        }
+
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: absolute;
+            top: 0;
+            width: 100%;
+            padding: 10px 10px;
+            margin-left: -20px;
+            z-index: 1;
+        }
+
+        .logo {
+            height: 20px;
+            width: 120px;
+        }
+
+        .navbar ul {
+            list-style: none;
+            display: flex;
+            gap: 5px;
+            padding: 0;
+            margin: 0;
+        }
+
+        .navbar li a {
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: bold;
+            color: #384a5f;
+            padding: 5px 10px;
+            transition: color 0.3s ease;
+        }
+
+        .navbar li a:hover {
+            color: #e84a5f;
+        }
+
+        .left-image {
+            position: absolute;
+            top: 50%;
+            left: 80px;
+            transform: translateY(-50%);
+            width: 370px;
+            height: auto;
+            z-index: 1;
+            animation: fadeIn 2s ease-in, bounceEffect 2s infinite;
+        }
+
+        .right-heading {
+            position: absolute;
+            top: 25%;
+            right: 50px;
+            transform: translateY(-50%);
+            font-size: 90px;
+            color: #ffffff;
+            font-family: 'Cooper', Arial, sans-serif;
+            font-weight: bold;
+            text-align: center;
+            z-index: 1;
+            animation: fadeIn 2s ease-in;
+        }
+
+        .right-subheading {
+            position: absolute;
+            top: 42%;
+            right: 200px;
+            transform: translateY(-50%);
+            font-size: 20px;
+            color: #ffffff;
+            font-family: 'Cooper', Arial, sans-serif;
+            text-align: center;
+            z-index: 1;
+            animation: fadeIn 2.5s ease-in;
+        }
+
+        .right-container {
+            position: absolute;
+            top: 62%;
+            right: 50px;
+            transform: translateY(-50%);
+            width: 740px;
+            padding: 10px;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: #ffffff9c;
+            font-family: 'Helvetica', Arial, sans-serif;
+            font-size: 15px;
+            text-align: center;
+            border-radius: 20px;
+            z-index: 1;
+            animation: fadeIn 3s ease-in;
+        }
+    </style>
+</head>
+<body>
+    <div id="particles-js"></div>
+
+    <nav class="navbar">
+        <a href="index.html">
+            <img src="milogo.png" alt="Logo" class="logo">
+        </a>
+        <ul>
+            <li><a href="home.html">HOME</a></li>
+            <li><a href="projects.html">PROJECTS</a></li>
+            <li><a href="skills.html">SKILLS</a></li>
+            <li><a href="education.html">EDUCATION</a></li>
+            <li><a href="contacts.html">CONTACTS</a></li>
+        </ul>
+    </nav>
+
+    <img src="awits.png" alt="Your Picture" class="left-image" id="draggable-image">
+
+    <h1 class="right-heading fade-in">Hey, It's Maykel!</h1>
+
+    <h2 class="right-subheading fade-in">Bachelor of Science in Information Technology</h2>
+
+    <div class="right-container fade-in">
+        <h3>I'am Karl Micheal, an aspiring student with an open mind and a strong willingness to learn new things while developing my skills in the IT field. I am committed to personal and professional growth, eager to take on challenges, and passionate about leveraging technology to solve problems and improve efficiency. My goal is to secure a successful future by continuously enhancing my technical abilities and gaining hands-on experience.</h3>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
+    <script>
+        particlesJS('particles-js', {
+            "particles": {
+                "number": {
+                    "value": 100
+                },
+                "color": {
+                    "value": "#ffffff"
+                },
+                "shape": {
+                    "type": "circle"
+                },
+                "opacity": {
+                    "value": 0.3
+                },
+                "size": {
+                    "value": 3
+                },
+                "move": {
+                    "enable": true,
+                    "speed": 2
+                }
+            }
+        });
+
+        const image = document.getElementById('draggable-image');
+        let isDragging = false;
+        let offsetX = 0;
+        let offsetY = 0;
+
+        image.addEventListener('mousedown', (e) => {
+            isDragging = true;
+            offsetX = e.offsetX;
+            offsetY = e.offsetY;
+            image.style.transition = 'none';
+        });
+
+        document.addEventListener('mousemove', (e) => {
+            if (isDragging) {
+                image.style.left = `${e.pageX - offsetX}px`;
+                image.style.top = `${e.pageY - offsetY}px`;
+            }
+        });
+
+        document.addEventListener('mouseup', () => {
+            if (isDragging) {
+                isDragging = false;
+                image.style.transition = 'all 0.2s ease';
+                image.style.left = '80px';
+                image.style.top = '50%';
+            }
+        });
+    </script>
+</body>
+</html>
